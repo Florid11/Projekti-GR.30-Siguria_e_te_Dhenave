@@ -20,7 +20,7 @@ public class Florian {
                 System.out.println(decrypted);
                 x=2;
             } catch (Exception e) {
-                System.out.println("Gabim ne tekst provoni perseri");
+                System.out.println("Gabim ne tekst shenojeni tekstin perseri");
             }
         }while (x==1);
     }
