@@ -2,25 +2,23 @@ import java.util.Scanner;
 
 public class Florian {
     public static void main(String[] args) {
+        System.out.println("Shenoni mesazhin:");
+        Scanner input=new Scanner(System.in);
         int x=1;
-        Scanner input = new Scanner(System.in);
-
-        System.out.print("Sheno tekstin: ");
         do {
             try {
 
 
                 String mesazhi = input.nextLine();
 
+
                 String encrypted = encryptMessage(mesazhi);
-                System.out.println(encrypted);
-
-
                 String decrypted = decryptMessage(encrypted);
-                System.out.println(decrypted);
+                System.out.println("Teksti i enkriptuar eshte:"+encrypted);
+                System.out.println("Teskti i dekriptuar eshte:"+decrypted);
                 x=2;
             } catch (Exception e) {
-                System.out.println("Gabim ne tekst shenojeni tekstin perseri");
+                System.out.println("Keni vendosur nje tekst jo valid!Provoni perseri");
             }
         }while (x==1);
     }
