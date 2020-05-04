@@ -1,4 +1,3 @@
-package com.devglan.rsa;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -22,7 +21,7 @@ public class Rsa {
     public void shkruajFile(String path, byte[] key,String cel) throws IOException {
         File f = new File(path);
         f.getParentFile().mkdirs();
-        if (f.isFile()){
+        if (f.exists()){
             System.out.println("Gabim: Celesi "+cel+" ekziston paraprakisht");
             System.exit(1);
         }
@@ -41,22 +40,39 @@ public class Rsa {
     public PublicKey getPublicKey() {
         return publicKey;
     }
-
-
     public static void main(String[] args) throws NoSuchAlgorithmException, IOException {
+        File f = new File("keys");
+        try {
+            if (!f.exists()) {
+                if (f.mkdir()) {
+                    System.out.println("File eshte krijuar");
+                } else {
+                    System.out.println("File nuk mund te krijohet");
+                }
+            } else {
+                System.out.println("File ekziston");
 
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        String x=f.getAbsolutePath();
+        System.out.println(x);
         Scanner input = new Scanner(System.in);
         System.out.println("Create-user:");
         String emer = input.next();
         try {
 
             Rsa keyPairGenerator = new Rsa();
-            keyPairGenerator.shkruajFile("C:\\Users\\PC\\Desktop\\celesat\\" + emer + ".pub.xml\\", keyPairGenerator.getPublicKey().getEncoded(),emer);
-            keyPairGenerator.shkruajFile("C:\\Users\\PC\\Desktop\\celesat\\" + emer + ".xml", keyPairGenerator.getPrivateKey().getEncoded(),emer);
-            System.out.println("Eshte krijuar celesi privat:celesat/" + emer + ".xml");
-            System.out.println("Eshte krijuar celesi publik:celesat/" + emer + ".pub.xml");
+            keyPairGenerator.shkruajFile(x+"\\"+ emer + ".pub.xml\\", keyPairGenerator.getPublicKey().getEncoded(),emer);
+            keyPairGenerator.shkruajFile(x +"\\"+ emer + ".xml", keyPairGenerator.getPrivateKey().getEncoded(),emer);
+            System.out.println("Eshte krijuar celesi privat:keys/" + emer + ".xml");
+            System.out.println("Eshte krijuar celesi publik:keys/" + emer + ".pub.xml");
+
         } catch(Exception e) {
-            System.out.println("gabim");
+            e.printStackTrace();
         }
+
     }
 }
